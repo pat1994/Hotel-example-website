@@ -34,7 +34,7 @@
   .nav-links a:hover { opacity: 1; color: var(--gold); }
   .hero { height: 100vh; min-height: 700px; position: relative; display: flex; align-items: center; padding: 120px 60px 0; overflow: hidden; }
   .hero-bg { position: absolute; inset: 0;
-    background: linear-gradient(rgba(13,27,42,0.55), rgba(13,27,42,0.75)), url('images/hero.jpg') center/cover no-repeat; }
+    background: linear-gradient(rgba(13,27,42,0.55), rgba(13,27,42,0.75)), url('images/hero.webp') center/cover no-repeat; }
   .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px); background-size: 80px 80px; }
   .hero-line { position: absolute; top: 0; left: 50%; width: 1px; height: 140px; background: linear-gradient(to bottom, transparent, var(--gold)); opacity: 0.4; }
   .hero-content { position: relative; z-index: 2; max-width: 680px; }
@@ -204,7 +204,7 @@
   </div>
   <div class="rooms-grid">
     <div class="room-card">
-      <div class="room-img"><img src="images/room1.jpg" alt="Garden View"></div>
+      <div class="room-img"><picture><source srcset="images/room1.webp" type="image/webp"><img src="images/room1.jpg" alt="Garden View" loading="lazy"></picture></div>
       <span class="room-no">01</span>
       <div class="room-type" data-i18n="room1.type"></div>
       <h3 class="room-name" data-i18n="room1.name"></h3>
@@ -220,7 +220,7 @@
       </div>
     </div>
     <div class="room-card">
-      <div class="room-img"><img src="images/room2.jpg" alt="Grand Suite"></div>
+      <div class="room-img"><picture><source srcset="images/room2.webp" type="image/webp"><img src="images/room2.jpg" alt="Grand Suite" loading="lazy"></picture></div>
       <span class="room-no">02</span>
       <div class="room-type" data-i18n="room2.type"></div>
       <h3 class="room-name" data-i18n="room2.name"></h3>
@@ -236,7 +236,7 @@
       </div>
     </div>
     <div class="room-card">
-      <div class="room-img"><img src="images/room3.jpg" alt="Noble Suite"></div>
+      <div class="room-img"><picture><source srcset="images/room3.webp" type="image/webp"><img src="images/room3.jpg" alt="Noble Suite" loading="lazy"></picture></div>
       <span class="room-no">03</span>
       <div class="room-type" data-i18n="room3.type"></div>
       <h3 class="room-name" data-i18n="room3.name"></h3>

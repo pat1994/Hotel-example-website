@@ -1,4 +1,106 @@
-git clone https://github.com/pat1994/Hotel-example-website
-cd Hotel-example-website
-pbpaste > index.html
-git add . && git commit -m "Initial commit: Noble Hotel" && git push
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noble Hotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #111f30;
+    --navy-light: #17293d;
+    --gold: #c8a96e;
+    --gold-light: #e8d5aa;
+    --cream: #f0e8d6;
+    --text: #b8a98a;
+    --subtle: rgba(200,169,110,0.15);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--navy); color: var(--text); font-family: 'Josefin Sans', sans-serif; font-weight: 300; letter-spacing: 0.04em; overflow-x: hidden; }
+  .lang-bar { position: fixed; top: 0; right: 0; z-index: 200; display: flex; gap: 0; padding: 14px 60px 0 0; }
+  .lang-btn { background: none; border: none; cursor: pointer; font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--text); opacity: 0.5; padding: 6px 10px; text-transform: uppercase; transition: opacity 0.3s, color 0.3s; }
+  .lang-btn.active { opacity: 1; color: var(--gold); }
+  .lang-btn:hover { opacity: 0.9; }
+  .lang-sep { color: var(--subtle); line-height: 2; font-size: 0.7rem; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 32px 60px; transition: background 0.5s, padding 0.5s; }
+  nav.scrolled { background: rgba(13,27,42,0.97); backdrop-filter: blur(12px); padding: 20px 60px; border-bottom: 1px solid rgba(200,169,110,0.1); }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
+  .logo span { font-style: italic; color: var(--cream); }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a { color: var(--cream); text-decoration: none; font-size: 0.62rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.75; transition: opacity 0.3s, color 0.3s; }
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+  .hero { height: 100vh; min-height: 700px; position: relative; display: flex; align-items: center; padding: 120px 60px 0; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0;
+    /* HERO BACKGROUND IMAGE — replace gradient with: background: linear-gradient(rgba(13,27,42,0.6), rgba(13,27,42,0.8)), url('images/hero.jpg') center/cover no-repeat; */
+    background: radial-gradient(ellipse at 20% 50%, #1b3a5c 0%, transparent 55%), radial-gradient(ellipse at 85% 20%, #0f2038 0%, transparent 40%), var(--navy); }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px); background-size: 80px 80px; }
+  .hero-line { position: absolute; top: 0; left: 50%; width: 1px; height: 140px; background: linear-gradient(to bottom, transparent, var(--gold)); opacity: 0.4; }
+  .hero-content { position: relative; z-index: 2; max-width: 680px; }
+  .eyebrow { font-size: 0.6rem; letter-spacing: 0.45em; color: var(--gold); text-transform: uppercase; margin-bottom: 28px; display: flex; align-items: center; gap: 18px; }
+  .eyebrow::before { content:''; width:40px; height:1px; background:var(--gold); display:block; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 8vw, 7.5rem); font-weight: 300; line-height: 0.95; color: var(--cream); margin-bottom: 8px; }
+  .hero h1 em { font-style: italic; color: var(--gold); display: block; }
+  .hero-sub { font-size: 0.8rem; line-height: 1.9; max-width: 400px; margin: 32px 0 52px; opacity: 0.7; }
+  .hero-actions { display: flex; gap: 24px; align-items: center; }
+  .btn-gold { background: var(--gold); color: var(--navy); padding: 16px 44px; text-decoration: none; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; font-family: 'Josefin Sans', sans-serif; font-weight: 400; transition: background 0.3s, transform 0.2s; display: inline-block; }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline { color: var(--cream); text-decoration: none; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; border-bottom: 1px solid rgba(240,232,214,0.3); padding-bottom: 3px; transition: color 0.3s, border-color 0.3s; }
+  .btn-outline:hover { color: var(--gold); border-color: var(--gold); }
+  .hero-aside { position: absolute; right: 60px; bottom: 90px; display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+  .hero-aside .big { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: var(--gold); line-height: 1; opacity: 0.7; }
+  .hero-aside .small { font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.45; }
+  .numbers-strip { display: flex; border-top: 1px solid var(--subtle); border-bottom: 1px solid var(--subtle); }
+  .num-item { flex: 1; padding: 44px 40px; border-right: 1px solid var(--subtle); text-align: center; }
+  .num-item:last-child { border-right: none; }
+  .num-item .n { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 300; color: var(--cream); display: block; line-height: 1; }
+  .num-item .n em { font-style: italic; color: var(--gold); }
+  .num-item .l { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; margin-top: 8px; opacity: 0.5; display: block; }
+  .section { padding: 120px 60px; }
+  .section-head { margin-bottom: 64px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300; color: var(--cream); line-height: 1.1; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub { font-size: 0.78rem; line-height: 1.9; max-width: 480px; margin-top: 16px; opacity: 0.65; }
+  .rooms-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--subtle); }
+  .room-card { background: var(--navy-mid); padding: 52px 44px 44px; position: relative; overflow: hidden; transition: background 0.4s; cursor: pointer; }
+  /* ROOM IMAGE: replace placeholder div with: <div class="room-img"><img src="images/room1.jpg" alt="..."></div> */
+  .room-img { height: 200px; margin: -52px -44px 36px; overflow: hidden; }
+  .room-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .room-img-placeholder { height: 200px; margin: -52px -44px 36px; background: var(--navy-light); border-bottom: 1px solid var(--subtle); display: flex; align-items: center; justify-content: center; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.4; }
+  .room-card:hover { background: var(--navy-light); }
+  .room-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+  .room-card:hover::after { transform: scaleX(1); }
+  .room-no { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300; line-height: 1; color: rgba(200,169,110,0.1); display: block; margin-bottom: -8px; }
+  .room-type { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+  .room-name { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 300; color: var(--cream); margin-bottom: 16px; line-height: 1.15; }
+  .room-desc { font-size: 0.75rem; line-height: 1.85; opacity: 0.6; margin-bottom: 36px; }
+  .room-features { display: flex; gap: 18px; margin-bottom: 32px; flex-wrap: wrap; }
+  .room-tag { font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; border: 1px solid rgba(200,169,110,0.2); padding: 5px 12px; }
+  .room-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+  .room-price .from { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; display: block; margin-bottom: 4px; }
+  .room-price .amount { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--cream); line-height: 1; }
+  .room-price .night { font-size: 0.65rem; opacity: 0.5; margin-left: 4px; }
+  .room-link { width: 44px; height: 44px; border: 1px solid rgba(200,169,110,0.3); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1rem; transition: background 0.3s, transform 0.3s; text-decoration: none; }
+  .room-card:hover .room-link { background: var(--gold); color: var(--navy); transform: rotate(45deg); }
+  .experience { padding: 120px 60px; background: var(--navy-mid); border-top: 1px solid var(--subtle); border-bottom: 1px solid var(--subtle); }
+  .exp-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 100px; align-items: center; margin-top: 64px; }
+  .amenities-list { display: flex; flex-direction: column; gap: 0; }
+  .amenity { display: flex; gap: 28px; align-items: flex-start; padding: 28px 0; border-bottom: 1px solid var(--subtle); }
+  .amenity:first-child { border-top: 1px solid var(--subtle); }
+  .amenity-icon { width: 42px; height: 42px; flex-shrink: 0; border: 1px solid rgba(200,169,110,0.3); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--gold); }
+  .amenity-text h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 300; color: var(--cream); margin-bottom: 6px; }
+  .amenity-text p { font-size: 0.73rem; line-height: 1.8; opacity: 0.6; }
+  .exp-quote { position: relative; padding: 64px; background: var(--navy-light); border: 1px solid var(--subtle); }
+  .exp-quote::before { content: '"'; position: absolute; top: 24px; left: 40px; font-family: 'Cormorant Garamond', serif; font-size: 8rem; line-height: 1; color: var(--gold); opacity: 0.2; }
+  .quote-text { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.5; margin-bottom: 32px; position: relative; z-index: 1; }
+  .quote-author { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+  .quote-stars { color: var(--gold); margin-bottom: 20px; letter-spacing: 4px; }
+  .exp-cta { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--subtle); }
+  .exp-cta p { font-size: 0.75rem; opacity: 0.6; margin-bottom: 20px; line-height: 1.8; }
+  .location { padding: 120px 60px; }
+  .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; background: var(--subtle); }
+  .loc-info { background: var(--navy-mid); padding: 64px 60px; display: flex; flex-direction: column; gap: 40px; }
+  .loc-detail { display: flex; flex-direction: column; gap: 8px; }
+  .loc-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase;

@@ -103,4 +103,350 @@
   .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 64px; background: var(--subtle); }
   .loc-info { background: var(--navy-mid); padding: 64px 60px; display: flex; flex-direction: column; gap: 40px; }
   .loc-detail { display: flex; flex-direction: column; gap: 8px; }
-  .loc-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase;
+  .loc-label { font-size: 0.58rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); }
+  .loc-value { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: var(--cream); line-height: 1.5; }
+  .loc-value a { color: var(--gold); text-decoration: none; }
+  .loc-map { background: var(--navy-light); min-height: 400px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .loc-map::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(200,169,110,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(200,169,110,0.06) 1px, transparent 1px); background-size: 40px 40px; }
+  .map-pin { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 16px; height: 16px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 8px rgba(200,169,110,0.15), 0 0 0 24px rgba(200,169,110,0.06); z-index: 2; }
+  .map-placeholder { text-align: center; padding: 40px; }
+  .map-placeholder .map-icon { font-size: 3rem; margin-bottom: 20px; opacity: 0.3; }
+  .map-placeholder p { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; opacity: 0.4; }
+  .reserve-strip { padding: 100px 60px; background: var(--navy-mid); text-align: center; border-top: 1px solid var(--subtle); }
+  .reserve-strip h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 4rem); font-weight: 300; color: var(--cream); margin-bottom: 16px; line-height: 1.1; }
+  .reserve-strip h2 em { font-style: italic; color: var(--gold); }
+  .reserve-strip p { font-size: 0.78rem; opacity: 0.6; max-width: 440px; margin: 0 auto 48px; line-height: 1.9; }
+  .reserve-form { display: flex; gap: 2px; max-width: 700px; margin: 0 auto; }
+  .reserve-form input { flex: 1; background: var(--navy-light); border: 1px solid var(--subtle); color: var(--cream); padding: 18px 24px; font-family: 'Josefin Sans', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; outline: none; transition: border-color 0.3s; }
+  .reserve-form input::placeholder { opacity: 0.4; }
+  .reserve-form input:focus { border-color: var(--gold); }
+  .reserve-form button { background: var(--gold); border: none; cursor: pointer; padding: 18px 44px; font-family: 'Josefin Sans', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--navy); font-weight: 400; transition: background 0.3s; }
+  .reserve-form button:hover { background: var(--gold-light); }
+  footer { padding: 64px 60px 40px; border-top: 1px solid var(--subtle); }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+  .footer-brand .logo { display: block; margin-bottom: 20px; font-size: 1.1rem; }
+  .footer-brand p { font-size: 0.73rem; line-height: 1.9; opacity: 0.55; max-width: 260px; }
+  .footer-col h5 { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-col ul a { color: var(--text); text-decoration: none; font-size: 0.73rem; opacity: 0.65; transition: opacity 0.3s, color 0.3s; }
+  .footer-col ul a:hover { opacity: 1; color: var(--gold); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--subtle); }
+  .footer-bottom p { font-size: 0.62rem; opacity: 0.35; }
+  .footer-socials { display: flex; gap: 20px; }
+  .footer-socials a { width: 36px; height: 36px; border: 1px solid var(--subtle); display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; font-size: 0.7rem; transition: border-color 0.3s, color 0.3s; }
+  .footer-socials a:hover { border-color: var(--gold); color: var(--gold); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.9s ease both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+  [data-lang] { display: none; }
+  [data-lang].active { display: block; }
+  @media (max-width: 900px) {
+    nav { padding: 24px; } .lang-bar { padding: 14px 24px 0 0; } .nav-links { display: none; }
+    .hero { padding: 0 24px 80px; } .section, .experience, .location, .reserve-strip { padding: 80px 24px; }
+    .rooms-grid, .location-grid, .footer-top { grid-template-columns: 1fr; }
+    .exp-layout { grid-template-columns: 1fr; gap: 60px; } .reserve-form { flex-direction: column; }
+    .hero-aside { display: none; } .numbers-strip { flex-wrap: wrap; } .num-item { min-width: 50%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')">EN</button>
+  <span class="lang-sep">·</span>
+  <button class="lang-btn" onclick="setLang('de')">DE</button>
+  <span class="lang-sep">·</span>
+  <button class="lang-btn" onclick="setLang('es')">ES</button>
+</div>
+
+<nav id="mainNav">
+  <a href="#" class="logo">Noble <span>Hotel</span></a>
+  <ul class="nav-links">
+    <li><a href="#rooms" data-i18n="nav.rooms"></a></li>
+    <li><a href="#experience" data-i18n="nav.experience"></a></li>
+    <li><a href="#location" data-i18n="nav.location"></a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+    <h1><span data-i18n="hero.h1a"></span><em data-i18n="hero.h1b"></em></h1>
+    <p class="hero-sub" data-i18n="hero.sub"></p>
+    <div class="hero-actions">
+      <a href="#reserve" class="btn-gold" data-i18n="hero.cta1"></a>
+      <a href="#rooms" class="btn-outline" data-i18n="hero.cta2"></a>
+    </div>
+  </div>
+  <div class="hero-aside">
+    <span class="big">IV★</span>
+    <span class="small" data-i18n="hero.stars"></span>
+  </div>
+</section>
+
+<div class="numbers-strip">
+  <div class="num-item"><span class="n">42</span><span class="l" data-i18n="stats.rooms"></span></div>
+  <div class="num-item"><span class="n">3</span><span class="l" data-i18n="stats.restaurants"></span></div>
+  <div class="num-item"><span class="n">1<em>ha</em></span><span class="l" data-i18n="stats.garden"></span></div>
+  <div class="num-item"><span class="n">24<em>h</em></span><span class="l" data-i18n="stats.service"></span></div>
+</div>
+
+<section class="section" id="rooms">
+  <div class="section-head">
+    <p class="eyebrow" data-i18n="rooms.eyebrow"></p>
+    <h2 class="section-title"><span data-i18n="rooms.title"></span> <em data-i18n="rooms.title2"></em></h2>
+    <p class="section-sub" data-i18n="rooms.sub"></p>
+  </div>
+  <div class="rooms-grid">
+    <div class="room-card">
+      <!-- SWAP: <div class="room-img"><img src="images/room1.jpg" alt="Garden View"></div> -->
+      <div class="room-img-placeholder">Photo · Room 01</div>
+      <span class="room-no">01</span>
+      <div class="room-type" data-i18n="room1.type"></div>
+      <h3 class="room-name" data-i18n="room1.name"></h3>
+      <p class="room-desc" data-i18n="room1.desc"></p>
+      <div class="room-features">
+        <span class="room-tag">32 m²</span>
+        <span class="room-tag" data-i18n="room.wifi"></span>
+        <span class="room-tag" data-i18n="room.breakfast"></span>
+      </div>
+      <div class="room-footer">
+        <div class="room-price"><span class="from" data-i18n="room.from"></span><span class="amount">€180<span class="night" data-i18n="room.night"></span></span></div>
+        <a href="#reserve" class="room-link">→</a>
+      </div>
+    </div>
+    <div class="room-card">
+      <!-- SWAP: <div class="room-img"><img src="images/room2.jpg" alt="Grand Suite"></div> -->
+      <div class="room-img-placeholder">Photo · Room 02</div>
+      <span class="room-no">02</span>
+      <div class="room-type" data-i18n="room2.type"></div>
+      <h3 class="room-name" data-i18n="room2.name"></h3>
+      <p class="room-desc" data-i18n="room2.desc"></p>
+      <div class="room-features">
+        <span class="room-tag">54 m²</span>
+        <span class="room-tag" data-i18n="room.wifi"></span>
+        <span class="room-tag" data-i18n="room.spa"></span>
+      </div>
+      <div class="room-footer">
+        <div class="room-price"><span class="from" data-i18n="room.from"></span><span class="amount">€290<span class="night" data-i18n="room.night"></span></span></div>
+        <a href="#reserve" class="room-link">→</a>
+      </div>
+    </div>
+    <div class="room-card">
+      <!-- SWAP: <div class="room-img"><img src="images/room3.jpg" alt="Noble Suite"></div> -->
+      <div class="room-img-placeholder">Photo · Room 03</div>
+      <span class="room-no">03</span>
+      <div class="room-type" data-i18n="room3.type"></div>
+      <h3 class="room-name" data-i18n="room3.name"></h3>
+      <p class="room-desc" data-i18n="room3.desc"></p>
+      <div class="room-features">
+        <span class="room-tag">88 m²</span>
+        <span class="room-tag" data-i18n="room.butler"></span>
+        <span class="room-tag" data-i18n="room.terrace"></span>
+      </div>
+      <div class="room-footer">
+        <div class="room-price"><span class="from" data-i18n="room.from"></span><span class="amount">€520<span class="night" data-i18n="room.night"></span></span></div>
+        <a href="#reserve" class="room-link">→</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <div class="section-head">
+    <p class="eyebrow" data-i18n="exp.eyebrow"></p>
+    <h2 class="section-title"><span data-i18n="exp.title"></span> <em data-i18n="exp.title2"></em></h2>
+  </div>
+  <div class="exp-layout">
+    <div class="amenities-list">
+      <div class="amenity"><div class="amenity-icon">◈</div><div class="amenity-text"><h4 data-i18n="amen1.title"></h4><p data-i18n="amen1.desc"></p></div></div>
+      <div class="amenity"><div class="amenity-icon">◇</div><div class="amenity-text"><h4 data-i18n="amen2.title"></h4><p data-i18n="amen2.desc"></p></div></div>
+      <div class="amenity"><div class="amenity-icon">◉</div><div class="amenity-text"><h4 data-i18n="amen3.title"></h4><p data-i18n="amen3.desc"></p></div></div>
+      <div class="amenity"><div class="amenity-icon">◎</div><div class="amenity-text"><h4 data-i18n="amen4.title"></h4><p data-i18n="amen4.desc"></p></div></div>
+    </div>
+    <div>
+      <div class="exp-quote">
+        <div class="quote-stars">★★★★★</div>
+        <p class="quote-text" data-i18n="quote.text"></p>
+        <span class="quote-author" data-i18n="quote.author"></span>
+      </div>
+      <div class="exp-cta">
+        <p data-i18n="exp.cta.desc"></p>
+        <a href="#reserve" class="btn-gold" data-i18n="exp.cta.btn"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="location" id="location">
+  <div class="section-head">
+    <p class="eyebrow" data-i18n="loc.eyebrow"></p>
+    <h2 class="section-title"><span data-i18n="loc.title"></span> <em data-i18n="loc.title2"></em></h2>
+  </div>
+  <div class="location-grid">
+    <div class="loc-info">
+      <div class="loc-detail"><span class="loc-label" data-i18n="loc.address.label"></span><span class="loc-value" data-i18n="loc.address.value"></span></div>
+      <div class="loc-detail"><span class="loc-label" data-i18n="loc.phone.label"></span><span class="loc-value"><a href="tel:+34900000000">+34 900 000 000</a></span></div>
+      <div class="loc-detail"><span class="loc-label" data-i18n="loc.email.label"></span><span class="loc-value"><a href="mailto:hello@noblehotel.com">hello@noblehotel.com</a></span></div>
+      <div class="loc-detail"><span class="loc-label" data-i18n="loc.checkin.label"></span><span class="loc-value" data-i18n="loc.checkin.value"></span></div>
+    </div>
+    <div class="loc-map">
+      <div class="map-pin"></div>
+      <div class="map-placeholder"><div class="map-icon">◎</div><p data-i18n="loc.map"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="reserve-strip" id="reserve">
+  <p class="eyebrow" style="justify-content:center" data-i18n="res.eyebrow"></p>
+  <h2><span data-i18n="res.title"></span> <em data-i18n="res.title2"></em></h2>
+  <p data-i18n="res.sub"></p>
+  <div class="reserve-form">
+    <input type="text" data-i18n-placeholder="res.checkin">
+    <input type="text" data-i18n-placeholder="res.checkout">
+    <input type="text" data-i18n-placeholder="res.guests">
+    <button data-i18n="res.btn"></button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo">Noble <span>Hotel</span></a>
+      <p data-i18n="footer.about"></p>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.col1.title"></h5>
+      <ul><li><a href="#rooms" data-i18n="footer.col1.l1"></a></li><li><a href="#rooms" data-i18n="footer.col1.l2"></a></li><li><a href="#rooms" data-i18n="footer.col1.l3"></a></li><li><a href="#rooms" data-i18n="footer.col1.l4"></a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.col2.title"></h5>
+      <ul><li><a href="#experience" data-i18n="footer.col2.l1"></a></li><li><a href="#experience" data-i18n="footer.col2.l2"></a></li><li><a href="#experience" data-i18n="footer.col2.l3"></a></li><li><a href="#experience" data-i18n="footer.col2.l4"></a></li></ul>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.col3.title"></h5>
+      <ul><li><a href="#location" data-i18n="footer.col3.l1"></a></li><li><a href="#" data-i18n="footer.col3.l2"></a></li><li><a href="#" data-i18n="footer.col3.l3"></a></li><li><a href="#" data-i18n="footer.col3.l4"></a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-i18n="footer.copy"></p>
+    <div class="footer-socials"><a href="#">in</a><a href="#">ig</a><a href="#">fb</a></div>
+  </div>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    "nav.rooms":"Rooms","nav.experience":"Experience","nav.location":"Location",
+    "hero.eyebrow":"Since 1924 · Four-Star Luxury","hero.h1a":"Where luxury","hero.h1b":"finds silence.",
+    "hero.sub":"Nestled in the heart of the old quarter, Noble Hotel offers an unparalleled retreat — where timeless elegance meets contemporary refinement.",
+    "hero.cta1":"Reserve Your Stay","hero.cta2":"Explore Rooms","hero.stars":"Four-Star Excellence",
+    "stats.rooms":"Exclusive Rooms & Suites","stats.restaurants":"Restaurants & Bars","stats.garden":"Private Gardens","stats.service":"Concierge Service",
+    "rooms.eyebrow":"Accommodation","rooms.title":"Our","rooms.title2":"Rooms & Suites",
+    "rooms.sub":"Each room is a carefully curated world unto itself — designed to envelop you in comfort, privacy, and understated beauty.",
+    "room1.type":"Classic Room","room1.name":"Garden View","room1.desc":"Tranquil rooms overlooking the private gardens, furnished with handcrafted pieces and the finest linens.",
+    "room2.type":"Junior Suite","room2.name":"Grand Suite","room2.desc":"Expansive living spaces with a private terrace, marble bathroom, and a panoramic view of the city rooftops.",
+    "room3.type":"Presidential Suite","room3.name":"Noble Suite","room3.desc":"Our crown jewel — a private apartment experience with butler service, a wraparound terrace, and bespoke interiors.",
+    "room.from":"From","room.night":"/ night","room.wifi":"Free WiFi","room.breakfast":"Breakfast incl.","room.spa":"Spa access","room.butler":"Butler service","room.terrace":"Private terrace",
+    "exp.eyebrow":"The Noble Life","exp.title":"Beyond the","exp.title2":"Ordinary",
+    "amen1.title":"Spa & Wellness","amen1.desc":"A sanctuary of calm — thermal pools, curated treatments, and private sauna suites.",
+    "amen2.title":"Fine Dining","amen2.desc":"Three distinct culinary experiences led by award-winning chefs using locally sourced ingredients.",
+    "amen3.title":"Private Events","amen3.desc":"Elegant spaces for intimate celebrations, corporate gatherings, and grand banquets.",
+    "amen4.title":"Concierge","amen4.desc":"Your dedicated team is available around the clock to curate every detail of your stay.",
+    "quote.text":"Noble Hotel is not just a place to sleep — it is a place to remember. Every detail speaks of care and excellence.",
+    "quote.author":"— Condé Nast Traveler","exp.cta.desc":"Indulge in our seasonal spa packages, curated dining experiences, and exclusive member rates.","exp.cta.btn":"View All Offers",
+    "loc.eyebrow":"Find Us","loc.title":"Our","loc.title2":"Location",
+    "loc.address.label":"Address","loc.address.value":"Calle del Noble, 1\n28001 Madrid, Spain",
+    "loc.phone.label":"Telephone","loc.email.label":"Email","loc.checkin.label":"Check-in / Check-out","loc.checkin.value":"From 15:00 / Until 12:00","loc.map":"Interactive Map",
+    "res.eyebrow":"Direct Booking","res.title":"Begin Your","res.title2":"Stay",
+    "res.sub":"Reserve directly for our best available rates and complimentary welcome amenities.",
+    "res.checkin":"Check-in date","res.checkout":"Check-out date","res.guests":"Guests","res.btn":"Check Availability",
+    "footer.about":"A landmark of discreet luxury since 1924. Noble Hotel is where the world's most discerning travellers come to rest.",
+    "footer.col1.title":"Rooms","footer.col1.l1":"Garden View","footer.col1.l2":"Grand Suite","footer.col1.l3":"Noble Suite","footer.col1.l4":"All Rooms",
+    "footer.col2.title":"Experiences","footer.col2.l1":"Spa & Wellness","footer.col2.l2":"Fine Dining","footer.col2.l3":"Private Events","footer.col2.l4":"Concierge",
+    "footer.col3.title":"Information","footer.col3.l1":"Location","footer.col3.l2":"Press","footer.col3.l3":"Careers","footer.col3.l4":"Privacy Policy",
+    "footer.copy":"© 2025 Noble Hotel. All rights reserved."
+  },
+  de: {
+    "nav.rooms":"Zimmer","nav.experience":"Erlebnis","nav.location":"Lage",
+    "hero.eyebrow":"Seit 1924 · Vier-Sterne-Luxus","hero.h1a":"Wo Luxus","hero.h1b":"Stille findet.",
+    "hero.sub":"Eingebettet im Herzen der Altstadt bietet das Noble Hotel eine unvergleichliche Zuflucht — zeitlose Eleganz trifft auf zeitgenössische Verfeinerung.",
+    "hero.cta1":"Jetzt Reservieren","hero.cta2":"Zimmer Entdecken","hero.stars":"Vier-Sterne-Exzellenz",
+    "stats.rooms":"Exklusive Zimmer & Suiten","stats.restaurants":"Restaurants & Bars","stats.garden":"Private Gärten","stats.service":"Concierge-Service",
+    "rooms.eyebrow":"Unterkunft","rooms.title":"Unsere","rooms.title2":"Zimmer & Suiten",
+    "rooms.sub":"Jedes Zimmer ist eine sorgfältig kuratierte Welt für sich — gestaltet, um Sie in Komfort, Privatsphäre und stiller Schönheit zu hüllen.",
+    "room1.type":"Classic Zimmer","room1.name":"Gartenblick","room1.desc":"Ruhige Zimmer mit Blick auf die privaten Gärten, eingerichtet mit handgefertigten Stücken und feinsten Bettwäsche.",
+    "room2.type":"Junior Suite","room2.name":"Grand Suite","room2.desc":"Großzügige Wohnbereiche mit privatem Balkon, Marmorbad und Panoramablick über die Stadtdächer.",
+    "room3.type":"Presidential Suite","room3.name":"Noble Suite","room3.desc":"Unser Kronjuwel — ein privates Apartment-Erlebnis mit Butler-Service, umlaufender Terrasse und individuellen Interieurs.",
+    "room.from":"Ab","room.night":"/ Nacht","room.wifi":"Kostenloses WLAN","room.breakfast":"Frühstück inkl.","room.spa":"Spa-Zugang","room.butler":"Butler-Service","room.terrace":"Private Terrasse",
+    "exp.eyebrow":"Das Noble-Leben","exp.title":"Jenseits des","exp.title2":"Gewöhnlichen",
+    "amen1.title":"Spa & Wellness","amen1.desc":"Ein Heiligtum der Ruhe — Thermalbäder, kuratierte Behandlungen und private Saunasuiten.",
+    "amen2.title":"Feines Dining","amen2.desc":"Drei einzigartige kulinarische Erlebnisse unter der Leitung preisgekrönter Köche mit lokalen Zutaten.",
+    "amen3.title":"Private Events","amen3.desc":"Elegante Räume für intime Feiern, Firmenveranstaltungen und große Bankette.",
+    "amen4.title":"Concierge","amen4.desc":"Ihr persönliches Team steht rund um die Uhr bereit, um jeden Detail Ihres Aufenthalts zu gestalten.",
+    "quote.text":"Das Noble Hotel ist nicht nur ein Ort zum Schlafen — es ist ein Ort der Erinnerungen. Jedes Detail zeugt von Sorgfalt und Exzellenz.",
+    "quote.author":"— Condé Nast Traveler","exp.cta.desc":"Genießen Sie unsere saisonalen Spa-Pakete, kuratierte Dining-Erlebnisse und exklusive Mitgliederpreise.","exp.cta.btn":"Alle Angebote",
+    "loc.eyebrow":"Unser Standort","loc.title":"Unsere","loc.title2":"Lage",
+    "loc.address.label":"Adresse","loc.address.value":"Calle del Noble, 1\n28001 Madrid, Spanien",
+    "loc.phone.label":"Telefon","loc.email.label":"E-Mail","loc.checkin.label":"Check-in / Check-out","loc.checkin.value":"Ab 15:00 Uhr / Bis 12:00 Uhr","loc.map":"Interaktive Karte",
+    "res.eyebrow":"Direktbuchung","res.title":"Beginnen Sie","res.title2":"Ihren Aufenthalt",
+    "res.sub":"Buchen Sie direkt für unsere besten Preise und kostenlose Willkommensannehmlichkeiten.",
+    "res.checkin":"Anreisedatum","res.checkout":"Abreisedatum","res.guests":"Gäste","res.btn":"Verfügbarkeit prüfen",
+    "footer.about":"Ein Wahrzeichen diskreten Luxus seit 1924. Noble Hotel ist der Ort, an dem die anspruchsvollsten Reisenden der Welt zur Ruhe kommen.",
+    "footer.col1.title":"Zimmer","footer.col1.l1":"Gartenblick","footer.col1.l2":"Grand Suite","footer.col1.l3":"Noble Suite","footer.col1.l4":"Alle Zimmer",
+    "footer.col2.title":"Erlebnisse","footer.col2.l1":"Spa & Wellness","footer.col2.l2":"Feines Dining","footer.col2.l3":"Private Events","footer.col2.l4":"Concierge",
+    "footer.col3.title":"Informationen","footer.col3.l1":"Lage","footer.col3.l2":"Presse","footer.col3.l3":"Karriere","footer.col3.l4":"Datenschutz",
+    "footer.copy":"© 2025 Noble Hotel. Alle Rechte vorbehalten."
+  },
+  es: {
+    "nav.rooms":"Habitaciones","nav.experience":"Experiencias","nav.location":"Ubicación",
+    "hero.eyebrow":"Desde 1924 · Lujo de Cuatro Estrellas","hero.h1a":"Donde el lujo","hero.h1b":"halla silencio.",
+    "hero.sub":"Enclavado en el corazón del casco antiguo, el Noble Hotel ofrece un refugio sin igual — donde la elegancia atemporal se fusiona con el refinamiento contemporáneo.",
+    "hero.cta1":"Reservar Ahora","hero.cta2":"Ver Habitaciones","hero.stars":"Excelencia Cuatro Estrellas",
+    "stats.rooms":"Habitaciones y Suites Exclusivas","stats.restaurants":"Restaurantes y Bares","stats.garden":"Jardines Privados","stats.service":"Servicio de Conserjería",
+    "rooms.eyebrow":"Alojamiento","rooms.title":"Nuestras","rooms.title2":"Habitaciones y Suites",
+    "rooms.sub":"Cada habitación es un mundo cuidadosamente curado — diseñado para envolverte en comodidad, privacidad y belleza discreta.",
+    "room1.type":"Habitación Clásica","room1.name":"Vista al Jardín","room1.desc":"Habitaciones tranquilas con vistas a los jardines privados, amuebladas con piezas artesanales y la mejor ropa de cama.",
+    "room2.type":"Suite Junior","room2.name":"Gran Suite","room2.desc":"Amplios espacios de estar con terraza privada, baño de mármol y vistas panorámicas a los tejados de la ciudad.",
+    "room3.type":"Suite Presidencial","room3.name":"Suite Noble","room3.desc":"Nuestra joya de la corona — una experiencia de apartamento privado con servicio de mayordomo, terraza perimetral e interiores exclusivos.",
+    "room.from":"Desde","room.night":"/ noche","room.wifi":"WiFi gratis","room.breakfast":"Desayuno incl.","room.spa":"Acceso al spa","room.butler":"Mayordomo","room.terrace":"Terraza privada",
+    "exp.eyebrow":"La Vida Noble","exp.title":"Más allá de","exp.title2":"lo Ordinario",
+    "amen1.title":"Spa & Bienestar","amen1.desc":"Un santuario de calma — piscinas termales, tratamientos exclusivos y saunas privadas.",
+    "amen2.title":"Alta Cocina","amen2.desc":"Tres experiencias culinarias únicas dirigidas por chefs galardonados con ingredientes locales.",
+    "amen3.title":"Eventos Privados","amen3.desc":"Espacios elegantes para celebraciones íntimas, reuniones corporativas y grandes banquetes.",
+    "amen4.title":"Conserjería","amen4.desc":"Su equipo dedicado está disponible las 24 horas para personalizar cada detalle de su estancia.",
+    "quote.text":"El Noble Hotel no es sólo un lugar para dormir — es un lugar para recordar. Cada detalle habla de cuidado y excelencia.",
+    "quote.author":"— Condé Nast Traveler","exp.cta.desc":"Disfrute de nuestros paquetes de spa de temporada, experiencias gastronómicas y tarifas exclusivas para socios.","exp.cta.btn":"Ver Todas las Ofertas",
+    "loc.eyebrow":"Encuéntrenos","loc.title":"Nuestra","loc.title2":"Ubicación",
+    "loc.address.label":"Dirección","loc.address.value":"Calle del Noble, 1\n28001 Madrid, España",
+    "loc.phone.label":"Teléfono","loc.email.label":"Email","loc.checkin.label":"Entrada / Salida","loc.checkin.value":"Desde las 15:00 / Hasta las 12:00","loc.map":"Mapa Interactivo",
+    "res.eyebrow":"Reserva Directa","res.title":"Comience","res.title2":"su Estancia",
+    "res.sub":"Reserve directamente para obtener nuestras mejores tarifas y amenidades de bienvenida gratuitas.",
+    "res.checkin":"Fecha de entrada","res.checkout":"Fecha de salida","res.guests":"Huéspedes","res.btn":"Comprobar Disponibilidad",
+    "footer.about":"Un referente del lujo discreto desde 1924. Noble Hotel es donde los viajeros más exigentes del mundo encuentran su descanso.",
+    "footer.col1.title":"Habitaciones","footer.col1.l1":"Vista al Jardín","footer.col1.l2":"Gran Suite","footer.col1.l3":"Suite Noble","footer.col1.l4":"Todas las habitaciones",
+    "footer.col2.title":"Experiencias","footer.col2.l1":"Spa & Bienestar","footer.col2.l2":"Alta Cocina","footer.col2.l3":"Eventos Privados","footer.col2.l4":"Conserjería",
+    "footer.col3.title":"Información","footer.col3.l1":"Ubicación","footer.col3.l2":"Prensa","footer.col3.l3":"Empleo","footer.col3.l4":"Privacidad",
+    "footer.copy":"© 2025 Noble Hotel. Todos los derechos reservados."
+  }
+};
+
+let currentLang = 'en';
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.textContent === lang.toUpperCase()));
+  document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.getAttribute('data-i18n'); if (i18n[lang][k]) el.textContent = i18n[lang][k]; });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const k = el.getAttribute('data-i18n-placeholder'); if (i18n[lang][k]) el.placeholder = i18n[lang][k]; });
+  document.documentElement.lang = lang;
+}
+window.addEventListener('scroll', () => document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60));
+setLang('en');
+</script>
+</body>
+</html>

@@ -166,11 +166,11 @@
     <li><a href="#location" data-i18n="nav.location"></a></li>
   </ul>
   <div class="lang-bar">
-    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
     <span class="lang-sep">·</span>
     <button class="lang-btn" onclick="setLang('de')">DE</button>
     <span class="lang-sep">·</span>
-    <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
   </div>
 </nav>
 
@@ -353,7 +353,7 @@
 const i18n = {
   en: {
     "nav.rooms":"Rooms","nav.experience":"Experience","nav.location":"Location",
-    "hero.eyebrow":"Since 1924 · Four-Star Luxury","hero.h1a":"Where luxury","hero.h1b":"finds silence.",
+    "hero.eyebrow":"Since 1924 · Four-Star Luxury","hero.h1a":"Where luxury","hero.h1b":"meets convenience.",
     "hero.sub":"Nestled in the heart of the old quarter, Noble Hotel offers an unparalleled retreat — where timeless elegance meets contemporary refinement.",
     "hero.cta1":"Reserve Your Stay","hero.cta2":"Explore Rooms","hero.stars":"Four-Star Excellence",
     "stats.rooms":"Exclusive Rooms & Suites","stats.restaurants":"Restaurants & Bars","stats.garden":"Private Gardens","stats.service":"Concierge Service",
@@ -384,7 +384,7 @@ const i18n = {
   },
   de: {
     "nav.rooms":"Zimmer","nav.experience":"Erlebnis","nav.location":"Lage",
-    "hero.eyebrow":"Seit 1924 · Vier-Sterne-Luxus","hero.h1a":"Wo Luxus","hero.h1b":"Stille findet.",
+    "hero.eyebrow":"Seit 1924 · Vier-Sterne-Luxus","hero.h1a":"Wo Luxus","hero.h1b":"Komfort trifft.",
     "hero.sub":"Eingebettet im Herzen der Altstadt bietet das Noble Hotel eine unvergleichliche Zuflucht — zeitlose Eleganz trifft auf zeitgenössische Verfeinerung.",
     "hero.cta1":"Jetzt Reservieren","hero.cta2":"Zimmer Entdecken","hero.stars":"Vier-Sterne-Exzellenz",
     "stats.rooms":"Exklusive Zimmer & Suiten","stats.restaurants":"Restaurants & Bars","stats.garden":"Private Gärten","stats.service":"Concierge-Service",
@@ -415,7 +415,7 @@ const i18n = {
   },
   es: {
     "nav.rooms":"Habitaciones","nav.experience":"Experiencias","nav.location":"Ubicación",
-    "hero.eyebrow":"Desde 1924 · Lujo de Cuatro Estrellas","hero.h1a":"Donde el lujo","hero.h1b":"halla silencio.",
+    "hero.eyebrow":"Desde 1924 · Lujo de Cuatro Estrellas","hero.h1a":"Donde el lujo","hero.h1b":"encuentra comodidad.",
     "hero.sub":"Enclavado en el corazón del casco antiguo, el Noble Hotel ofrece un refugio sin igual — donde la elegancia atemporal se fusiona con el refinamiento contemporáneo.",
     "hero.cta1":"Reservar Ahora","hero.cta2":"Ver Habitaciones","hero.stars":"Excelencia Cuatro Estrellas",
     "stats.rooms":"Habitaciones y Suites Exclusivas","stats.restaurants":"Restaurantes y Bares","stats.garden":"Jardines Privados","stats.service":"Servicio de Conserjería",
@@ -455,7 +455,7 @@ function setLang(lang) {
   document.documentElement.lang = lang;
 }
 window.addEventListener('scroll', () => document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60));
-setLang('en');
+setLang('es');
 
 let amenCurrent = 0;
 let amenTimer = null;

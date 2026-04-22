@@ -20,11 +20,11 @@
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
   html { scroll-behavior: smooth; }
   body { background: var(--navy); color: var(--text); font-family: 'Josefin Sans', sans-serif; font-weight: 300; letter-spacing: 0.04em; overflow-x: hidden; }
-  .lang-bar { position: fixed; top: 0; right: 0; z-index: 200; display: flex; gap: 0; padding: 14px 60px 0 0; }
+  .lang-bar { display: flex; align-items: center; gap: 0; padding-left: 28px; border-left: 1px solid rgba(200,169,110,0.2); }
   .lang-btn { background: none; border: none; cursor: pointer; font-family: 'Josefin Sans', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; color: var(--text); opacity: 0.5; padding: 6px 10px; text-transform: uppercase; transition: opacity 0.3s, color 0.3s; }
   .lang-btn.active { opacity: 1; color: var(--gold); }
   .lang-btn:hover { opacity: 0.9; }
-  .lang-sep { color: var(--subtle); line-height: 2; font-size: 0.7rem; }
+  .lang-sep { color: rgba(200,169,110,0.3); font-size: 0.7rem; }
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 32px 60px; transition: background 0.5s, padding 0.5s; }
   nav.scrolled { background: rgba(13,27,42,0.97); backdrop-filter: blur(12px); padding: 20px 60px; border-bottom: 1px solid rgba(200,169,110,0.1); }
   .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); text-decoration: none; }
@@ -148,7 +148,7 @@
   [data-lang] { display: none; }
   [data-lang].active { display: block; }
   @media (max-width: 900px) {
-    nav { padding: 24px; } .lang-bar { padding: 14px 24px 0 0; } .nav-links { display: none; }
+    nav { padding: 24px; } .nav-links { display: none; } .lang-bar { padding-left: 16px; }
     .hero { padding: 0 24px 80px; } .section, .experience, .location, .reserve-strip { padding: 80px 24px; }
     .rooms-grid, .location-grid, .footer-top { grid-template-columns: 1fr; }
     .exp-layout { grid-template-columns: 1fr; gap: 60px; } .reserve-form { flex-direction: column; }
@@ -158,14 +158,6 @@
 </head>
 <body>
 
-<div class="lang-bar">
-  <button class="lang-btn active" onclick="setLang('en')">EN</button>
-  <span class="lang-sep">·</span>
-  <button class="lang-btn" onclick="setLang('de')">DE</button>
-  <span class="lang-sep">·</span>
-  <button class="lang-btn" onclick="setLang('es')">ES</button>
-</div>
-
 <nav id="mainNav">
   <a href="#" class="logo">Noble <span>Hotel</span></a>
   <ul class="nav-links">
@@ -173,6 +165,13 @@
     <li><a href="#experience" data-i18n="nav.experience"></a></li>
     <li><a href="#location" data-i18n="nav.location"></a></li>
   </ul>
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" onclick="setLang('de')">DE</button>
+    <span class="lang-sep">·</span>
+    <button class="lang-btn" onclick="setLang('es')">ES</button>
+  </div>
 </nav>
 
 <section class="hero">

@@ -97,6 +97,7 @@
   .exp-gallery { position: relative; height: 480px; overflow: hidden; border: 1px solid var(--subtle); }
   .gallery-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; }
   .gallery-slide.active { opacity: 1; }
+  .gallery-slide picture { display: block; width: 100%; height: 100%; }
   .gallery-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .gallery-placeholder { width: 100%; height: 100%; background: var(--navy-light); display: flex; align-items: center; justify-content: center; font-size: 0.58rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); opacity: 0.4; }
   .gallery-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 2; }
@@ -272,20 +273,16 @@
     </div>
     <div class="exp-gallery" id="expGallery">
       <div class="gallery-slide active">
-        <!-- SWAP: <img src="images/amen1.jpg" alt="Spa & Wellness"> -->
-        <div class="gallery-placeholder">Spa &amp; Wellness · Photo</div>
+        <picture><source srcset="images/amen1.webp" type="image/webp"><img src="images/amen1.jpg" alt="Spa & Wellness" loading="lazy"></picture>
       </div>
       <div class="gallery-slide">
-        <!-- SWAP: <img src="images/amen2.jpg" alt="Fine Dining"> -->
-        <div class="gallery-placeholder">Fine Dining · Photo</div>
+        <picture><source srcset="images/amen2.webp" type="image/webp"><img src="images/amen2.jpg" alt="Fine Dining" loading="lazy"></picture>
       </div>
       <div class="gallery-slide">
-        <!-- SWAP: <img src="images/amen3.jpg" alt="Private Events"> -->
-        <div class="gallery-placeholder">Private Events · Photo</div>
+        <picture><source srcset="images/amen3.webp" type="image/webp"><img src="images/amen3.jpg" alt="Private Events" loading="lazy"></picture>
       </div>
       <div class="gallery-slide">
-        <!-- SWAP: <img src="images/amen4.jpg" alt="Concierge"> -->
-        <div class="gallery-placeholder">Concierge · Photo</div>
+        <picture><source srcset="images/amen4.webp" type="image/webp"><img src="images/amen4.jpg" alt="Concierge" loading="lazy"></picture>
       </div>
       <div class="gallery-dots">
         <button class="gallery-dot active" onclick="selectAmen(0)"></button>
